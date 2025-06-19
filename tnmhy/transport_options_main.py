@@ -37,7 +37,7 @@ AREAS = [
 # --------------------- タブ1: ホテルプラン検索 ---------------------
 with tab1:
     st.header("ホテルプラン検索")
-    APP_ID = st.secrets["EKISPERT_API_KEY"]
+    APP_ID = st.secrets["RAKUTEN_TRAVEL_API_KEY"]
 
     st.sidebar.header("こだわり条件")
     squeeze_keys = [k for k, v in zip(["kinen", "internet", "daiyoku", "onsen", "breakfast", "dinner"], [
