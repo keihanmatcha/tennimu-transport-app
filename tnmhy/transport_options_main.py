@@ -110,9 +110,7 @@ with tab1:
                                     continue
                             except:
                                 continue
-                        price = int(price)
-                    if price < min_price:
-                        min_price = price
+    
                     plan = {
                         "会場": area["area_name"],
                         "ホテル名": info.get("hotelName"),
