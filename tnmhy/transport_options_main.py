@@ -123,22 +123,6 @@ with tab1:
                         "予約URL": basic.get("reserveUrl")
                     }
                     plans.append(plan)
-　　　　　　　　　base_prices[area["area_name"]] = min_price
-　　　　　　　　　all_relaxed_prices = []
-                for key in squeeze_keys:
-                    relaxed = ",".join(k for k in squeeze_keys if k != key)
-                    relaxed_prices = []
-    for area in AREAS:
-        ...
-        if min_price < float("inf"):
-            price_diff = base_prices[area["area_name"]] - min_price
-            relaxed_prices.append({
-                "会場": area["area_name"],
-                "条件": f"{key}除外",
-                "価格差": price_diff
-            })
-    if relaxed_prices:
-        all_relaxed_prices.extend(relaxed_prices)
 
                 if plans:
                     df = pd.DataFrame(plans).sort_values("料金")
