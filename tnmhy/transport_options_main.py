@@ -69,6 +69,7 @@ with tab1:
 
     if st.button("検索開始"):
         all_area_results = []
+        base_prices[area["area_name"]] = min_price
         with st.spinner("検索中..."):
             for area in AREAS:
                 st.subheader(area["area_name"])
@@ -110,16 +111,36 @@ with tab1:
                                     continue
                             except:
                                 continue
-                        plan = {
-                            "会場": area["area_name"],
-                            "ホテル名": info.get("hotelName"),
-                            "住所": info.get("address1", "") + info.get("address2", ""),
-                            "評価": info.get("reviewAverage", "N/A"),
-                            "プラン": basic.get("planName", "プラン名不明"),
-                            "料金": int(price),
-                            "予約URL": basic.get("reserveUrl")
-                        }
-                        plans.append(plan)
+                        price = int(price)
+                    if price < min_price:
+                        min_price = price
+                    plan = {
+                        "会場": area["area_name"],
+                        "ホテル名": info.get("hotelName"),
+                        "住所": info.get("address1", "") + info.get("address2", ""),
+                        "評価": info.get("reviewAverage", "N/A"),
+                        "プラン": basic.get("planName", "プラン名不明"),
+                        "料金": price,
+                        "予約URL": basic.get("reserveUrl")
+                    }
+                    plans.append(plan)
+　　　　　　　　　base_prices[area["area_name"]] = min_price
+　　　　　　　　　all_relaxed_prices = []
+                for key in squeeze_keys:
+                    relaxed = ",".join(k for k in squeeze_keys if k != key)
+                    relaxed_prices = []
+    for area in AREAS:
+        ...
+        if min_price < float("inf"):
+            price_diff = base_prices[area["area_name"]] - min_price
+            relaxed_prices.append({
+                "会場": area["area_name"],
+                "条件": f"{key}除外",
+                "価格差": price_diff
+            })
+    if relaxed_prices:
+        all_relaxed_prices.extend(relaxed_prices)
+
                 if plans:
                     df = pd.DataFrame(plans).sort_values("料金")
                     df["予約URL"] = df["予約URL"].apply(lambda x: f"[予約]({x})")
