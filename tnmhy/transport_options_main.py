@@ -69,7 +69,6 @@ with tab1:
 
     if st.button("検索開始"):
         all_area_results = []
-        base_prices[area["area_name"]] = min_price
         with st.spinner("検索中..."):
             for area in AREAS:
                 st.subheader(area["area_name"])
@@ -193,8 +192,7 @@ with tab1:
                 selected = st.selectbox("選択してください", options.tolist(), key=f"hotel_{area}")
                 selected_row = df.iloc[options.tolist().index(selected)]
                 selected_hotel_plans[area] = selected_row
-            # session_state に保存
-            st.session_state["selected_hotel_plans"] = selected_hotel_plans
+           
 
 
 # --------------------- タブ2: 交通費セレクター ---------------------
